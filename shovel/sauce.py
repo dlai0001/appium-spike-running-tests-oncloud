@@ -7,6 +7,8 @@ import os
 @task
 def deploy():
     #command to push file to sauce storage
+
+
     print("Publishing Zip file to Sauce Storage")
     command = ['curl',
                '-u',
@@ -19,9 +21,8 @@ def deploy():
                '--data-binary',
                '@staging/TapIt.zip'] # file to upload location
     print(' '.join(command))
-    result = subprocess.Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-    output, error = result.communicate()
-    print(output, error)
-    if result.returncode != 0:
+    result = subprocess.call(' '.join(command), shell=True)
+    if result != 0:
         print("Publishing to Sauce Storage Failed.")
         exit(1)
+
