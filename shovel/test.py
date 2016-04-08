@@ -12,4 +12,7 @@ def run():
 
     print(' '.join(command))
     result = subprocess.Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-    print(result.stdout.read(), result.stderr.read())
+    output, error = result.communicate()
+    print(output, error)
+    if result.returncode != 0:
+        exit(1)
