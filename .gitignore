@@ -4,3 +4,4 @@ wheelhouse
 */.cache/*
 .setenvironments
 staging
+*/__pycache__/*

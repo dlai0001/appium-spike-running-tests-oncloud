@@ -18,12 +18,13 @@ def driver(request):
         desired_caps['platformVersion'] = "9.2"
         desired_caps['platformName'] = "iOS"
         desired_caps['app'] = "sauce-storage:TapIt.zip"
+        desired_caps['name'] = os.environ['TEST_NAME']
         # saucelabs connection string.
         sauce_user = os.environ['SAUCE_USER']
         sauce_key = os.environ['SAUCE_KEY']
         wd = webdriver.Remote("http://{sauce_user}:{sauce_key}@ondemand.saucelabs.com:80/wd/hub".format(
             sauce_user=sauce_user,
-            auce_key=sauce_key),
+            sauce_key=sauce_key),
             desired_caps)
     elif os.environ['RUN_TARGET'] == "AMAZON_DEVICE_FARM":
         wd = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
