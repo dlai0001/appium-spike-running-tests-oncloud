@@ -7,18 +7,6 @@ import os
 @task
 def deploy():
     #command to push file to sauce storage
-
-    print("Zipping app file for sauce deployment")
-    command = ["zip", "staging/TapIt.zip", "-r", "staging/TapIt.app"]
-    print(' '.join(command))
-    result = subprocess.Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-    output, error = result.communicate()
-    print(output, error)
-    if result.returncode != 0:
-        print("Zipping failed.")
-        exit(1)
-
-
     print("Publishing Zip file to Sauce Storage")
     command = ['curl',
                '-u',
