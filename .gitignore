@@ -2,3 +2,4 @@
 .virtualenv
 wheelhouse
 */.cache/*
+.setenvironments

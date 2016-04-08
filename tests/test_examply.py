@@ -6,29 +6,39 @@ import os
 @pytest.fixture(scope="function")
 def driver(request):
     desired_caps = {}
+    wd = None
 
-    # Localhost appium
-    # desired_caps['appium-version'] = '1.0'
-    # desired_caps['platformName'] = 'iOS'
-    # desired_caps['platformVersion'] = '9.2'
-    # desired_caps['deviceName'] = 'iPhone 6'
-    # desired_caps['app'] = os.path.abspath(
-    #     '/Users/DavidLai/Projects/TapIt/DerivedData/Build/Products/Debug-iphonesimulator/TapIt.app')
-    # local host
-    wd = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+    if os.environ['RUN_TARGET'] == "SAUCE":
+        # sauce labs.
+        desired_caps['browserName'] = ""
+        desired_caps['appiumVersion'] = "1.4.16"
+        #desired_caps['deviceName'] = "iPhone 5"
+        desired_caps['deviceName'] = "iPhone Simulator"
+        desired_caps['deviceOrientation'] = "portrait"
+        desired_caps['platformVersion'] = "9.2"
+        desired_caps['platformName'] = "iOS"
+        desired_caps['app'] = "sauce-storage:TapIt.zip"
+        # saucelabs connection string.
+        sauce_user = os.environ['SAUCE_USER']
+        sauce_key = os.environ['SAUCE_KEY']
+        wd = webdriver.Remote("http://{sauce_user}:{sauce_key}@ondemand.saucelabs.com:80/wd/hub".format(
+            sauce_user=sauce_user,
+            auce_key=sauce_key),
+            desired_caps)
+    elif os.environ['RUN_TARGET'] == "AMAZON_DEVICE_FARM":
+        wd = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+    else:
+        # Localhost appium
+        desired_caps['appium-version'] = '1.0'
+        desired_caps['platformName'] = 'iOS'
+        desired_caps['platformVersion'] = '9.2'
+        desired_caps['deviceName'] = 'iPhone 6'
+        desired_caps['app'] = os.path.abspath(
+            '/Users/DavidLai/Projects/TapIt/DerivedData/Build/Products/Debug-iphonesimulator/TapIt.app')
+        # local host
+        wd = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
 
-    #sauce labs.
-    # desired_caps['browserName'] = ""
-    # desired_caps['appiumVersion'] = "1.4.16"
-    # #desired_caps['deviceName'] = "iPhone 5"
-    # desired_caps['deviceName'] = "iPhone Simulator"
-    # desired_caps['deviceOrientation'] = "portrait"
-    # desired_caps['platformVersion'] = "9.2"
-    # desired_caps['platformName'] = "iOS"
-    # desired_caps['app'] = "sauce-storage:TapIt.zip"
-    # # saucelabs
-    # wd = webdriver.Remote('http://dlaiaxs:d3336bf0-3e85-4353-befe-35a7f40fe553@ondemand.saucelabs.com:80/wd/hub',
-    #                       desired_caps)
+
 
     wd.implicitly_wait(300)
 
