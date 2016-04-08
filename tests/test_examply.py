@@ -27,20 +27,21 @@ def driver(request):
             sauce_key=sauce_key),
             desired_caps)
 
-    elif os.environ['RUN_TARGET'] == "AMAZON_DEVICE_FARM" or os.getenv('SCREENSHOT_PATH') is not None :
+    # elif os.environ['RUN_TARGET'] == "AMAZON_DEVICE_FARM" or os.getenv('SCREENSHOT_PATH') is not None :
+    else:
         # Using a hack that SCREENSHOT_PATH is provided by Amazon Device Farm.
         # We have to do this because when running with the ADF Jenkins Plugin, we do not have the
         # opportunity to set the enviornment variables.
         wd = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
-    else:
-        # Localhost appium
-        desired_caps['appium-version'] = '1.0'
-        desired_caps['platformName'] = 'iOS'
-        desired_caps['platformVersion'] = '9.2'
-        desired_caps['deviceName'] = 'iPhone 6'
-        desired_caps['app'] = os.path.abspath('staging/TapIt.app')
-        # local host
-        wd = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+    # else:
+    #     # Localhost appium
+    #     desired_caps['appium-version'] = '1.0'
+    #     desired_caps['platformName'] = 'iOS'
+    #     desired_caps['platformVersion'] = '9.2'
+    #     desired_caps['deviceName'] = 'iPhone 6'
+    #     desired_caps['app'] = os.path.abspath('staging/TapIt.app')
+    #     # local host
+    #     wd = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
 
 
 
