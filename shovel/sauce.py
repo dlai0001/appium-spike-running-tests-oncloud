@@ -7,6 +7,11 @@ import os
 @task
 def deploy():
     #command to push file to sauce storage
+    command = ["zip", "staging/TapIt.zip", "-r", "staging/TapIt.app"]
+    print(' '.join(command))
+    result = subprocess.Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
+    print(result.stdout.read(), result.stderr.read())
+
     command = ['curl',
                '-u',
                "{sauce_user}:{sauce_key}".format(sauce_user=os.environ['SAUCE_USER'],sauce_key=os.environ['SAUCE_KEY']), #auth info
