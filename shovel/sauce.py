@@ -16,7 +16,7 @@ def deploy():
                '"Content-Type: application/octet-stream"',
                "https://saucelabs.com/rest/v1/storage/{user}/TapIt.zip?overwrite=true".format(user=os.environ['SAUCE_USER']), #sauce storage location
                '--data-binary',
-               'staging/TapIt.app.zip'] # file to upload location
+               'staging/TapIt.zip'] # file to upload location
     print(' '.join(command))
     result = subprocess.Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
     print(result.stdout.read(), result.stderr.read())
