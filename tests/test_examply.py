@@ -33,8 +33,7 @@ def driver(request):
         desired_caps['platformName'] = 'iOS'
         desired_caps['platformVersion'] = '9.2'
         desired_caps['deviceName'] = 'iPhone 6'
-        desired_caps['app'] = os.path.abspath(
-            '/Users/DavidLai/Projects/TapIt/DerivedData/Build/Products/Debug-iphonesimulator/TapIt.app')
+        desired_caps['app'] = os.path.abspath('staging/TapIt.app')
         # local host
         wd = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
 
