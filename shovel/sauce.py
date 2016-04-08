@@ -1,6 +1,5 @@
 # noinspection PyUnresolvedReferences
 from shovel import task
-from subprocess import PIPE
 import subprocess
 import os
 

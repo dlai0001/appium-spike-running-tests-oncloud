@@ -26,8 +26,12 @@ def driver(request):
             sauce_user=sauce_user,
             sauce_key=sauce_key),
             desired_caps)
-    elif os.environ['RUN_TARGET'] == "AMAZON_DEVICE_FARM":
-        wd = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+
+    elif os.environ['RUN_TARGET'] == "AMAZON_DEVICE_FARM" or os.getenv('SCREENSHOT_PATH') is not None :
+        # Using a hack that SCREENSHOT_PATH is provided by Amazon Device Farm.
+        # We have to do this because when running with the ADF Jenkins Plugin, we do not have the
+        # opportunity to set the enviornment variables.
+        wd = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
     else:
         # Localhost appium
         desired_caps['appium-version'] = '1.0'
