@@ -5,3 +5,4 @@ wheelhouse
 .setenvironments
 staging
 */__pycache__/*
+results.xml
