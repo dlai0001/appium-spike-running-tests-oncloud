@@ -6,8 +6,6 @@ import os
 @task
 def deploy():
     #command to push file to sauce storage
-
-
     print("Publishing Zip file to Sauce Storage")
     command = ['curl',
                '-u',

@@ -6,3 +6,4 @@ wheelhouse
 staging
 */__pycache__/*
 results.xml
+test_bundle.zip
